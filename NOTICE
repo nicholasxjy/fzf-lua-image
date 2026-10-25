@@ -1,0 +1,16 @@
+fzf-lua-image
+
+The standalone image renderer contains modified portions of snacks.nvim:
+https://github.com/folke/snacks.nvim
+Source revision: 882c996cf28183f4d63640de0b4c02ec886d01f2
+
+Upstream files: lua/snacks/image/{terminal,image,placement,util,convert}.lua
+Upstream authors: folke and snacks.nvim contributors.
+License: Apache License 2.0 (a full copy is in LICENSES/snacks.nvim.txt).
+
+Modified files: lua/fzf-lua-image/{terminal,image,util,convert,diacritics}.lua
+Changes: extracted file preview functionality; removed Snacks globals, config,
+window, process, picker and document dependencies; added fzf-lua integration,
+cancellable conversion, automatic cleanup and standalone configuration.
+
+Original fzf-lua-image code is covered by the MIT license in LICENSE.

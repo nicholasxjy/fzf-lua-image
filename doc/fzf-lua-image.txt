@@ -1,0 +1,37 @@
+*fzf-lua-image.txt*  Standalone image previews for fzf-lua
+
+==============================================================================
+INTRODUCTION                                              *fzf-lua-image*
+
+fzf-lua-image automatically adds image previews to fzf-lua's builtin file
+previewer. It does not depend on snacks.nvim. See README.md for installation,
+supported formats, conversion delegates and complete configuration examples.
+
+Requirements: Neovim 0.10+, a recent fzf-lua with attach_snacks_image_buf,
+and a Kitty Graphics Protocol terminal (Kitty, Ghostty or WezTerm).
+ImageMagick is required for formats other than PNG.
+
+==============================================================================
+SETUP                                               *fzf-lua-image.setup()*
+>
+    require("fzf-lua-image").setup({
+      enabled = true,
+      force = false,
+      terminal = {},
+    })
+<
+Calling setup() is optional. The plugin/ entry point installs the adapter.
+For lazy.nvim, add "nicholasxjy/fzf-lua-image" as an fzf-lua dependency.
+
+The existing fzf-lua option previewers.builtin.snacks_image.enabled = false
+also disables this adapter. External extension preview commands take priority.
+
+==============================================================================
+HEALTH                                              *fzf-lua-image-health*
+>
+    :checkhealth fzf-lua-image
+<
+Checks the Neovim version, fzf-lua attachment hook, terminal and ImageMagick.
+Conversion failures are shown in the preview buffer.
+
+ vim:tw=78:ts=8:noet:ft=help:norl:

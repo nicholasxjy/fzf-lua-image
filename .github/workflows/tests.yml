@@ -1,0 +1,39 @@
+name: tests
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        neovim: [v0.10.4, v0.11.5, stable]
+    env:
+      FZF_LUA_PATH: ${{ github.workspace }}/.deps/fzf-lua
+      LAZY_NVIM_PATH: ${{ github.workspace }}/.deps/lazy.nvim
+      NVIM_LOG_FILE: ${{ runner.temp }}/nvim.log
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          repository: ibhagwan/fzf-lua
+          ref: 507dfc85551ff2d9293ec215f10f19395252aada
+          path: .deps/fzf-lua
+      - uses: actions/checkout@v5
+        with:
+          repository: folke/lazy.nvim
+          path: .deps/lazy.nvim
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.neovim }}
+      - name: Install fzf and ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fzf imagemagick
+      - name: Test modules, startup, file picker and lazy loading
+        run: make test test-lazy
