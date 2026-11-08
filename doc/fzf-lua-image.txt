@@ -8,8 +8,9 @@ previewer. It does not depend on snacks.nvim. See README.md for installation,
 supported formats, conversion delegates and complete configuration examples.
 
 Requirements: Neovim 0.10+, a recent fzf-lua with attach_snacks_image_buf,
-and a Kitty Graphics Protocol terminal (Kitty, Ghostty or WezTerm).
-ImageMagick is required for formats other than PNG.
+and a Kitty Graphics Protocol terminal (Kitty, Ghostty, WezTerm or Rex).
+Kitty and Ghostty use Unicode placeholders; WezTerm and Rex use cursor
+placements. ImageMagick is required for formats other than PNG.
 
 ==============================================================================
 SETUP                                               *fzf-lua-image.setup()*

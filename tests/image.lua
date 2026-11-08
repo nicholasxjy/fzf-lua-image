@@ -91,6 +91,19 @@ return {
     assert(contains("\27[u"))
     H.eq(0, #vim.api.nvim_buf_get_extmarks(buf, image.ns, 0, -1, {}))
   end },
+  { "renders in Rex using cursor placements automatically", function()
+    config.options.terminal.supported = nil
+    config.options.terminal.placeholders = nil
+    vim.env.TERM_PROGRAM = "rex"
+    local buf, win = H.window()
+    image.attach(buf, { src = H.png(), win = win })
+    H.wait(function() return contains("a=p") end)
+    assert(contains("t=f"))
+    H.eq(false, contains("U=1"))
+    assert(contains("\27[s"))
+    assert(contains("\27[u"))
+    H.eq(0, #vim.api.nvim_buf_get_extmarks(buf, image.ns, 0, -1, {}))
+  end },
   { "displays conversion errors in the preview", function()
     local buf, win = H.window()
     image.attach(buf, { src = H.write(H.tmp .. "/broken.png", "broken"), win = win })

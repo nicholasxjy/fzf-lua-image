@@ -26,7 +26,7 @@ function M.check()
       health.warn("Enable termguicolors for Unicode image placeholders")
     end
   else
-    health.warn("Terminal is unsupported; use Kitty, Ghostty, or WezTerm")
+    health.warn("Terminal is unsupported; use Kitty, Ghostty, WezTerm, or Rex")
   end
   if vim.fn.executable("magick") == 1 or (vim.fn.has("win32") == 0 and vim.fn.executable("convert") == 1) then
     health.ok("ImageMagick found")

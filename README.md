@@ -10,8 +10,9 @@ when switching files, hiding, resizing, or closing previews.
 ## Requirements
 
 - Neovim **0.10+**, a recent fzf-lua, and fzf.
-- **Kitty, Ghostty, or WezTerm**. Enable `termguicolors` for Unicode placeholders.
-  Zellij is unsupported.
+- **Kitty, Ghostty, WezTerm, or [Rex](https://www.superlogical.com/rex/docs)**.
+  Kitty and Ghostty use Unicode placeholders and require `termguicolors`;
+  WezTerm and Rex use cursor placements. Zellij is unsupported.
 - **ImageMagick** (`magick`, or `convert` on Unix) for formats other than PNG.
   PDF and video previews require the appropriate delegates, such as Ghostscript and FFmpeg.
 

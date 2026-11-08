@@ -18,6 +18,31 @@ return {
     H.eq(true, terminal.env().supported)
     H.eq(false, terminal.env().placeholders)
   end },
+  { "uses cursor placements for Rex", function()
+    config.setup({ terminal = {} })
+    vim.env.TERM_PROGRAM = "rex"
+    H.eq(true, terminal.env().supported)
+    H.eq(false, terminal.env().placeholders)
+    vim.env.TERM_PROGRAM = nil
+    vim.env.TERM = "xterm-rex"
+    H.eq(true, terminal.env().supported)
+    H.eq(false, terminal.env().placeholders)
+  end },
+  { "keeps Rex on cursor placements with inherited Kitty and Ghostty variables", function()
+    config.setup({ terminal = {} })
+    vim.env.TERM_PROGRAM = "rex"
+    vim.env.TERM = "xterm-kitty"
+    vim.env.KITTY_WINDOW_ID = "1"
+    vim.env.GHOSTTY_RESOURCES_DIR = "/ghostty"
+    H.eq(true, terminal.env().supported)
+    H.eq(false, terminal.env().placeholders)
+  end },
+  { "honors explicit terminal overrides in Rex", function()
+    config.setup({ terminal = { supported = false, placeholders = true } })
+    vim.env.TERM_PROGRAM = "rex"
+    H.eq(false, terminal.env().supported)
+    H.eq(true, terminal.env().placeholders)
+  end },
   { "detects SSH and rejects Zellij", function()
     config.setup({ terminal = {} })
     vim.env.TERM_PROGRAM = "ghostty"

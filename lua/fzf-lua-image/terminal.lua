@@ -14,10 +14,11 @@ function M.env()
   local kitty = term:find("kitty", 1, true) ~= nil or vim.env.KITTY_WINDOW_ID ~= nil
   local ghostty = term:find("ghostty", 1, true) ~= nil or vim.env.GHOSTTY_RESOURCES_DIR ~= nil
   local wezterm = term:find("wezterm", 1, true) ~= nil
-  local supported = kitty or ghostty or wezterm
+  local rex = term:find("rex", 1, true) ~= nil
+  local supported = kitty or ghostty or wezterm or rex
   if vim.env.ZELLIJ or term:find("zellij", 1, true) then supported = false end
   if opts.supported ~= nil then supported = opts.supported end
-  local placeholders = kitty or ghostty
+  local placeholders = (kitty or ghostty) and not rex
   if opts.placeholders ~= nil then placeholders = opts.placeholders end
   local remote = vim.env.SSH_CONNECTION ~= nil or vim.env.SSH_CLIENT ~= nil
   if opts.remote ~= nil then remote = opts.remote end
